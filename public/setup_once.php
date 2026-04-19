@@ -2,7 +2,7 @@
 $token = $_GET['token'] ?? '';
 if ($token !== 'erp2026setup') { http_response_code(403); die('Acesso negado.'); }
 
-$appPath = '/home3/fionco36/erp_elizeu';
+$appPath = '/home3/fionco36/sistemadegestao.targetup.com.br';
 
 echo "<pre>\n=== ERP Setup ===\n";
 echo "PHP: " . PHP_VERSION . "\n";
