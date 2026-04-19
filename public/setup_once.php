@@ -1,58 +1,41 @@
 <?php
-// ATENÇÃO: apagar este arquivo imediatamente após usar!
 $token = $_GET['token'] ?? '';
 if ($token !== 'erp2026setup') {
     http_response_code(403);
     die('Acesso negado.');
 }
 
-// __DIR__ = /home/fionco36/public/sistemadegestao
-// dirname(__DIR__, 2) = /home/fionco36
 $appPath = dirname(__DIR__, 2) . '/erp_app3';
 
-echo "<pre>\n";
-echo "=== ERP Loteamentos — Setup Inicial ===\n\n";
+// Encontra o binário PHP disponível
+$phpBin = null;
+foreach (['/usr/local/bin/php8.5', '/usr/local/bin/php8.4', '/usr/local/bin/php8.3', '/usr/bin/php'] as $bin) {
+    if (file_exists($bin)) { $phpBin = $bin; break; }
+}
 
-// 1. Copiar .env se não existir
+echo "<pre>\n=== ERP Setup ===\n\n";
+echo "App path: $appPath\n";
+echo "PHP bin: $phpBin\n";
+echo ".env existe: " . (file_exists("$appPath/.env") ? 'SIM' : 'NAO') . "\n";
+
 if (!file_exists("$appPath/.env")) {
-    if (file_exists("$appPath/.env.production")) {
-        copy("$appPath/.env.production", "$appPath/.env");
-        echo "✓ .env criado\n";
-    } else {
-        echo "✗ .env.production não encontrado!\n";
+    copy("$appPath/.env.production", "$appPath/.env");
+    echo "✓ .env criado\n";
+}
+
+$storageLink = __DIR__ . '/storage';
+if (!file_exists($storageLink)) {
+    symlink("$appPath/storage/app/public", $storageLink);
+    echo "✓ symlink storage\n";
+}
+
+if ($phpBin) {
+    foreach (['key:generate --force', 'migrate --force', 'config:cache', 'route:cache', 'view:cache'] as $cmd) {
+        echo "\n$ php artisan $cmd\n";
+        echo shell_exec("$phpBin $appPath/artisan $cmd 2>&1");
     }
 } else {
-    echo "✓ .env já existe\n";
+    echo "ERRO: nenhum binário PHP encontrado!\n";
 }
 
-// 2. Symlink storage
-$storageLink = __DIR__ . '/storage';
-$storageTarget = "$appPath/storage/app/public";
-if (!file_exists($storageLink)) {
-    symlink($storageTarget, $storageLink);
-    echo "✓ symlink storage criado\n";
-} else {
-    echo "✓ symlink storage já existe\n";
-}
-
-// 3. Rodar artisan via PHP CLI
-$php = '/usr/local/bin/php8.3';
-$artisan = "$appPath/artisan";
-
-$commands = [
-    'key:generate --force',
-    'migrate --force',
-    'config:cache',
-    'route:cache',
-    'view:cache',
-];
-
-foreach ($commands as $cmd) {
-    echo "\n$ php artisan $cmd\n";
-    $output = shell_exec("$php $artisan $cmd 2>&1");
-    echo $output;
-}
-
-echo "\n=== CONCLUIDO ===\n";
-echo "APAGUE este arquivo agora!\n";
-echo "</pre>";
+echo "\n=== CONCLUIDO — apague este arquivo! ===\n</pre>";
