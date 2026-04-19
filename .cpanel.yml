@@ -5,4 +5,9 @@ deployment:
     - cp -rf /home3/fionco36/erp_app2/public/. /home3/fionco36/public/sistemadegestao/
     - cp /home3/fionco36/erp_app2/deploy/server_index.php /home3/fionco36/public/sistemadegestao/index.php
     - chmod -R 775 /home3/fionco36/erp_app2/storage /home3/fionco36/erp_app2/bootstrap/cache
-    - test -f /home3/fionco36/erp_app2/.env || cp /home3/fionco36/erp_app2/.env.production /home3/fionco36/erp_app2/.env
+    - cp /home3/fionco36/erp_app2/.env.production /home3/fionco36/erp_app2/.env
+    - /usr/local/bin/php8.3 /home3/fionco36/erp_app2/artisan config:clear
+    - /usr/local/bin/php8.3 /home3/fionco36/erp_app2/artisan migrate --force
+    - /usr/local/bin/php8.3 /home3/fionco36/erp_app2/artisan config:cache
+    - /usr/local/bin/php8.3 /home3/fionco36/erp_app2/artisan route:cache
+    - /usr/local/bin/php8.3 /home3/fionco36/erp_app2/artisan view:cache
