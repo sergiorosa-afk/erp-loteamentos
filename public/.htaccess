@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteBase /sistemadegestao/
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
