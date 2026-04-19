@@ -8,7 +8,7 @@ if ($token !== 'erp2026setup') {
 
 // __DIR__ = /home/fionco36/public/sistemadegestao
 // dirname(__DIR__, 2) = /home/fionco36
-$appPath = dirname(__DIR__, 2) . '/erp_app2';
+$appPath = dirname(__DIR__, 2) . '/erp_app3';
 
 echo "<pre>\n";
 echo "=== ERP Loteamentos — Setup Inicial ===\n\n";
