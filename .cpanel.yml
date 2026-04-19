@@ -6,8 +6,8 @@ deployment:
     - cp /home3/fionco36/erp_app3/deploy/server_index.php /home3/fionco36/elizeu.targetup.com.br/sistemadegestao/index.php
     - chmod -R 775 /home3/fionco36/erp_app3/storage /home3/fionco36/erp_app3/bootstrap/cache
     - cp /home3/fionco36/erp_app3/.env.production /home3/fionco36/erp_app3/.env
-    - /usr/local/bin/php8.3 /home3/fionco36/erp_app3/artisan config:clear
-    - /usr/local/bin/php8.3 /home3/fionco36/erp_app3/artisan migrate --force
-    - /usr/local/bin/php8.3 /home3/fionco36/erp_app3/artisan config:cache
-    - /usr/local/bin/php8.3 /home3/fionco36/erp_app3/artisan route:cache
-    - /usr/local/bin/php8.3 /home3/fionco36/erp_app3/artisan view:cache
+    - /usr/local/bin/php8.4 /home3/fionco36/erp_app3/artisan config:clear
+    - /usr/local/bin/php8.4 /home3/fionco36/erp_app3/artisan migrate --force
+    - /usr/local/bin/php8.4 /home3/fionco36/erp_app3/artisan config:cache
+    - /usr/local/bin/php8.4 /home3/fionco36/erp_app3/artisan route:cache
+    - /usr/local/bin/php8.4 /home3/fionco36/erp_app3/artisan view:cache
