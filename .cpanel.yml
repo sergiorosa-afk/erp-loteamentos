@@ -1,5 +1,4 @@
 ---
 deployment:
   tasks:
-    - chmod -R 775 /home3/fionco36/sistemadegestao.targetup.com.br/storage /home3/fionco36/sistemadegestao.targetup.com.br/bootstrap/cache
     - cp /home3/fionco36/sistemadegestao.targetup.com.br/.env.production /home3/fionco36/sistemadegestao.targetup.com.br/.env
