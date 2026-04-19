@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    - mkdir -p /home3/fionco36/elizeu.targetup.com.br/sistemadegestao
-    - cp -rf /home3/fionco36/erp_app3/public/. /home3/fionco36/elizeu.targetup.com.br/sistemadegestao/
-    - cp /home3/fionco36/erp_app3/deploy/server_index.php /home3/fionco36/elizeu.targetup.com.br/sistemadegestao/index.php
+    - mkdir -p /home3/fionco36/elizeu.targetup.com.br/public/sistemadegestao
+    - cp -rf /home3/fionco36/erp_app3/public/. /home3/fionco36/elizeu.targetup.com.br/public/sistemadegestao/
+    - cp /home3/fionco36/erp_app3/deploy/server_index.php /home3/fionco36/elizeu.targetup.com.br/public/sistemadegestao/index.php
     - chmod -R 775 /home3/fionco36/erp_app3/storage /home3/fionco36/erp_app3/bootstrap/cache
     - cp /home3/fionco36/erp_app3/.env.production /home3/fionco36/erp_app3/.env
