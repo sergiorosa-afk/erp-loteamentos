@@ -1,10 +1,7 @@
 ---
 deployment:
   tasks:
-    # 1. Instalar dependências PHP (sem pacotes dev)
-    - /usr/local/bin/php8.3 /usr/local/bin/composer install --no-dev --optimize-autoloader 2>&1
-
-    # 2. Criar pasta pública e copiar arquivos de public/
+    # 1. Criar pasta pública e copiar arquivos de public/
     - mkdir -p /home/fionco36/public_html/sistemadegestao
     - cp -rf /home/fionco36/erp_app/public/. /home/fionco36/public_html/sistemadegestao/
 
