@@ -20,7 +20,27 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuadraController;
 use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
+// ROTA TEMPORÁRIA DE SETUP — APAGAR APÓS USO
+Route::get('/setup-init', function () {
+    if (request('token') !== 'erp2026setup') {
+        abort(403, 'Acesso negado.');
+    }
+    $output = [];
+    Artisan::call('key:generate', ['--force' => true]);
+    $output[] = '✓ key:generate — ' . Artisan::output();
+    Artisan::call('migrate', ['--force' => true]);
+    $output[] = '✓ migrate — ' . Artisan::output();
+    Artisan::call('config:cache');
+    $output[] = '✓ config:cache — ' . Artisan::output();
+    Artisan::call('route:cache');
+    $output[] = '✓ route:cache — ' . Artisan::output();
+    Artisan::call('view:cache');
+    $output[] = '✓ view:cache — ' . Artisan::output();
+    return '<pre>=== SETUP CONCLUIDO ===\n' . implode("\n", $output) . '\n\nAPAGUE a rota /setup-init do web.php agora!</pre>';
+});
 
 Route::get('/', fn () => redirect()->route('dashboard'));
 
