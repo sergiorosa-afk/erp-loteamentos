@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    - mkdir -p /home/fionco36/public_html/sistemadegestao
-    - cp -rf /home/fionco36/erp_app/public/. /home/fionco36/public_html/sistemadegestao/
-    - cp /home/fionco36/erp_app/deploy/server_index.php /home/fionco36/public_html/sistemadegestao/index.php
+    - mkdir -p /home/fionco36/public/sistemadegestao
+    - cp -rf /home/fionco36/erp_app/public/. /home/fionco36/public/sistemadegestao/
+    - cp /home/fionco36/erp_app/deploy/server_index.php /home/fionco36/public/sistemadegestao/index.php
     - chmod -R 775 /home/fionco36/erp_app/storage /home/fionco36/erp_app/bootstrap/cache
     - test -f /home/fionco36/erp_app/.env || cp /home/fionco36/erp_app/.env.production /home/fionco36/erp_app/.env
