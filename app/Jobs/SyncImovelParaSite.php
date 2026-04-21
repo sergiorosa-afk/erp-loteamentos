@@ -22,6 +22,7 @@ class SyncImovelParaSite implements ShouldQueue
     public function __construct(
         public readonly int $imovelId,
         public readonly string $evento = 'saved',
+        public readonly ?array $midiaIds = null,
     ) {}
 
     public function handle(SiteApiService $service): void
@@ -44,11 +45,22 @@ class SyncImovelParaSite implements ShouldQueue
             'payload'   => $payload,
             'resposta'  => $result['resposta'],
         ]);
+
+        if ($result['ok']) {
+            $dados = json_decode($result['resposta'], true);
+            $siteId = $dados['property_id'] ?? null;
+            $imovel->updateQuietly([
+                'site_imovel_id'      => $siteId ?: $imovel->site_imovel_id,
+                'site_sincronizado_em' => now(),
+            ]);
+        }
     }
 
     private function buildPayload(Imovel $imovel): array
     {
-        $midias = $imovel->midias->map(fn ($m) => [
+        $midias = $imovel->midias
+            ->when($this->midiaIds !== null, fn ($col) => $col->whereIn('id', $this->midiaIds))
+            ->map(fn ($m) => [
             'tipo'   => $m->tipo,
             'url'    => Storage::url($m->path),
             'capa'   => (bool) $m->capa,

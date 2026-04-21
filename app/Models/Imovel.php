@@ -25,11 +25,13 @@ class Imovel extends Model
         'cidade', 'estado', 'cep', 'latitude', 'longitude',
         'valor_venal', 'valor_mercado', 'valor_iptu_anual', 'data_ultima_avaliacao',
         'situacao_ocupacao', 'observacoes',
+        'site_imovel_id', 'site_sincronizado_em',
     ];
 
     protected $casts = [
         'condominio_fechado'    => 'boolean',
         'data_ultima_avaliacao' => 'date',
+        'site_sincronizado_em'  => 'datetime',
         'area_total'            => 'decimal:2',
         'area_construida'       => 'decimal:2',
         'area_privativa'        => 'decimal:2',

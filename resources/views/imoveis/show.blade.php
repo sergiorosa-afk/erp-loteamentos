@@ -1130,18 +1130,30 @@
                 {{-- ABA: SYNC SITE --}}
                 <div x-show="aba === 'sync'" x-cloak>
 
+                    {{-- Badge status sync --}}
+                    <div class="mb-4 flex flex-wrap items-center gap-3">
+                        @if($imovel->site_imovel_id)
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-100 text-green-800 text-sm font-medium">
+                            ✅ Sincronizado com site · ID #{{ $imovel->site_imovel_id }}
+                            @if($imovel->site_sincronizado_em)
+                            <span class="text-green-600 font-normal">· {{ $imovel->site_sincronizado_em->format('d/m/Y H:i') }}</span>
+                            @endif
+                        </span>
+                        @else
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-gray-500 text-sm">
+                            ⏸ Nunca sincronizado com o site
+                        </span>
+                        @endif
+                    </div>
+
                     @if(auth()->user()->isAdmin())
-                    {{-- Botão Forçar Sync --}}
+                    {{-- Botão Sync --}}
                     <div class="mb-4 flex items-center justify-between">
                         <p class="text-sm text-gray-500">Histórico de sincronizações automáticas e manuais com o site.</p>
-                        <form action="{{ route('imoveis.sync.forcar', $imovel) }}" method="POST">
-                            @csrf
-                            <button type="submit"
-                                    onclick="return confirm('Forçar sincronização do imóvel com o site?')"
-                                    class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700">
-                                🔄 Forçar Sync Agora
-                            </button>
-                        </form>
+                        <a href="{{ route('imoveis.sync.preview', $imovel) }}"
+                           class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700">
+                            🔄 Sincronizar com o Site
+                        </a>
                     </div>
                     @endif
 

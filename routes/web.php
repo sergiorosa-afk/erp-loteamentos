@@ -159,7 +159,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/imoveis/{imovel}/pessoas', [ImovelVinculoController::class, 'store'])->name('imoveis.pessoas.store');
         Route::delete('/imoveis/{imovel}/pessoas/{pessoa}', [ImovelVinculoController::class, 'destroy'])->name('imoveis.pessoas.destroy');
 
-        // Sync Imóvel → Site (Sprint 16)
+        // Sync Imóvel → Site
+        Route::get('/imoveis/{imovel}/sync/preview', [ImovelSyncController::class, 'preview'])->name('imoveis.sync.preview');
         Route::post('/imoveis/{imovel}/sync', [ImovelSyncController::class, 'forcar'])->name('imoveis.sync.forcar');
     });
 
