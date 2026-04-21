@@ -62,7 +62,7 @@ class SyncImovelParaSite implements ShouldQueue
             ->when($this->midiaIds !== null, fn ($col) => $col->whereIn('id', $this->midiaIds))
             ->map(fn ($m) => [
             'tipo'   => $m->tipo,
-            'url'    => Storage::url($m->path),
+            'url'    => Storage::disk('public')->url($m->path),
             'capa'   => (bool) $m->capa,
             'titulo' => $m->titulo ?? $m->nome_original,
         ])->values()->all();

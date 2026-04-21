@@ -174,7 +174,7 @@
                             <div class="relative rounded-lg overflow-hidden border-2 transition-all"
                                  :class="checked ? 'border-indigo-500' : 'border-transparent opacity-50'">
                                 @if($midia->tipo === 'imagem')
-                                    <img src="{{ Storage::url($midia->path) }}"
+                                    <img src="{{ Storage::disk('public')->url($midia->path) }}"
                                          alt="{{ $midia->titulo ?? $midia->nome_original }}"
                                          class="w-full h-28 object-cover bg-gray-100">
                                 @else
