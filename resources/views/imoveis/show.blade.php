@@ -604,7 +604,7 @@
                                         <div class="flex items-center gap-3">
                                             {{-- Miniatura clicável para imagens, ícone para outros --}}
                                             @if($doc->isImage())
-                                            <img src="{{ Storage::url($doc->path) }}"
+                                            <img src="{{ Storage::disk('public')->url($doc->path) }}"
                                                  alt="{{ $doc->nome_original }}"
                                                  class="h-12 w-12 object-cover rounded border border-gray-200 shrink-0 cursor-pointer"
                                                  @click="$dispatch('open-doc-viewer', {

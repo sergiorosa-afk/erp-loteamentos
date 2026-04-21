@@ -32,7 +32,7 @@ class ImovelDocumento extends Model
 
     public function url(): string
     {
-        return Storage::url($this->path);
+        return Storage::disk('public')->url($this->path);
     }
 
     public function tamanhoFormatado(): string

@@ -38,7 +38,7 @@ class PessoaCertidao extends Model
 
     public function url(): string
     {
-        return Storage::url($this->arquivo_path);
+        return Storage::disk('public')->url($this->arquivo_path);
     }
 
     public function vencida(): bool
